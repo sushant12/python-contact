@@ -31,7 +31,7 @@ class App:
                   fg="white", command=self.save_callback)
         save_btn.grid(row=3,column=1)
 
-        self.show_contacts()
+        self.show_contacts(win)
         
     def create_label(self,win, text):
         return Label(win,text=text,font=("Arial Bold", 10))
@@ -59,12 +59,12 @@ class App:
         self.email_field.delete(0, 'end')
         self.contact_field.delete(0, 'end')
 
-    def show_contacts(self):
+    def show_contacts(self,win=None):
         with open("db.txt",'r') as f:
             infos = f.read().splitlines()
             rep = len(infos)+3
             for info in infos:
-                Label(window, text=info).grid(row = rep, sticky=E)
+                Label(win, text=info).grid(row = rep, sticky=N)
                 rep += 1
 
 App(window)
