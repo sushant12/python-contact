@@ -1,10 +1,11 @@
 #! /usr/bin/python3
 
-from tkinter import *
+import tkinter as tk
 from tkinter import messagebox
-window = Tk()
+window = tk.Tk()
 window.title("Contacts")
 window.geometry('300x200')
+
 
 class App:
     def __init__(self, win):
@@ -12,9 +13,9 @@ class App:
         self.email_lbl = self.create_label(win, "Email")
         self.contact_lbl = self.create_label(win, "Contact")
 
-        self.name_lbl.grid(row=0, sticky=E)
-        self.email_lbl.grid(row=1, sticky=E)
-        self.contact_lbl.grid(row=2, sticky=E)
+        self.name_lbl.grid(row=0, sticky=tk.E)
+        self.email_lbl.grid(row=1, sticky=tk.E)
+        self.contact_lbl.grid(row=2, sticky=tk.E)
 
         self.name_field = self.create_entry(win)
         self.email_field = self.create_entry(win)
@@ -24,17 +25,17 @@ class App:
         self.email_field.grid(row=1, column=1)
         self.contact_field.grid(row=2, column=1)
         
-        save_btn = Button(window, text="Save", bg="green",
-                  fg="white", command=self.save_callback)
-        save_btn.grid(row=3,column=1)
+        save_btn = tk.Button(window, text="Save", bg="green",
+                             fg="white", command=self.save_callback)
+        save_btn.grid(row=3, column=1)
 
         self.show_contacts(win)
         
     def create_label(self, win, text):
-        return Label(win, text=text, font=("Arial Bold", 10))
+        return tk.Label(win, text=text, font=("Arial Bold", 10))
 
     def create_entry(self, win):
-        return Entry(win)
+        return tk.Entry(win)
 
     def save_callback(self):
         try:
@@ -43,7 +44,7 @@ class App:
             self.show_contacts()
         except:
             messagebox.showinfo("Error",  sys.exc_info()[0])
-        
+
     def save_info(self):
         with open("db.txt", 'a+') as f:
             f.write(self.name_field.get() + ",")
@@ -60,11 +61,10 @@ class App:
             infos = f.read().splitlines()
             rep = len(infos)+3
             for info in infos:
-                Label(win, text=info).grid(row=rep, sticky=N)
+                tk.Label(win, text=info).grid(row=rep, sticky=tk.N)
                 rep += 1
-                
+
 
 App(window)
-
 
 window.mainloop()
